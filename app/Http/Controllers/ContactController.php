@@ -31,7 +31,7 @@ class ContactController extends Controller
                 'user_message' => $request->message,
             ]; 
             Mail::send('emails.contact', $data, function ($mail) use ($request) { 
-                $mail->to('soudayssoudays7@gmail.com')
+                $mail->to('seremad7@gmail.com')
                     ->subject('Nouveau message du site');
             });
             return back()->with('success', 'Votre message a été envoyé avec succès l adresse  seremad5@gmail.com !');

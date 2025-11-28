@@ -28,9 +28,9 @@ class AdminPublicationController extends Controller
         try {
             $validated = $request->validate([
                 'titre'   => 'required|string|max:255',
-                'contenu' => 'required|string',
-                'images'   => 'nullable|array',
-                'images.*' => 'image|max:2048',
+                'contenu' => 'required|string|max:10000',
+                'images'   => 'nullable|array|max:5',
+                'images.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
             ]);
 
             DB::transaction(function () use ($validated, $request) {
@@ -41,9 +41,22 @@ class AdminPublicationController extends Controller
 
                 if ($request->hasFile('images')) {
                     foreach ($request->file('images') as $file) {
-                        $nomOriginal = $file->getClientOriginalName();
+                        // Validation sécurisée des extensions
+                        $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                        $extension = strtolower($file->getClientOriginalExtension());
+                        
+                        if (!in_array($extension, $allowedExtensions)) {
+                            throw new \Exception('Type de fichier non autorisé');
+                        }
+                        
+                        // Vérification du type MIME
+                        $allowedMimes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+                        if (!in_array($file->getMimeType(), $allowedMimes)) {
+                            throw new \Exception('Type MIME non autorisé');
+                        }
+                        
+                        $nomOriginal = basename($file->getClientOriginalName());
                         $taille = $file->getSize();
-                        $extension = $file->getClientOriginalExtension();
                         $nomFichier = time() . '_' . uniqid() . '.' . $extension;
                         $file->move(public_path('images'), $nomFichier);
 
@@ -90,9 +103,9 @@ class AdminPublicationController extends Controller
     {
         $validated = $request->validate([
             'titre' => 'required|string|max:255',
-            'contenu'  => 'required|string',
-            'images' => 'nullable|array',
-            'images.*' => 'image|max:2048',
+            'contenu'  => 'required|string|max:10000',
+            'images' => 'nullable|array|max:5',
+            'images.*' => 'image|mimes:jpeg,jpg,png,gif,webp|max:2048',
         ]);
 
         $publication->update([
@@ -103,9 +116,23 @@ class AdminPublicationController extends Controller
         // Ajouter de nouvelles images si présentes
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $file) {
-                $nomOriginal = $file->getClientOriginalName();
+                // Validation sécurisée des extensions
+                $allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
+                $extension = strtolower($file->getClientOriginalExtension());
+                
+                if (!in_array($extension, $allowedExtensions)) {
+                    throw new \Exception('Type de fichier non autorisé');
+                }
+                
+                // Vérification du type MIME
+                $allowedMimes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif', 'image/webp'];
+                if (!in_array($file->getMimeType(), $allowedMimes)) {
+                    throw new \Exception('Type MIME non autorisé');
+                }
+                
+                $nomOriginal = basename($file->getClientOriginalName());
                 $taille = $file->getSize();
-                $extension = $file->getClientOriginalExtension();
+                $extension = strtolower($file->getClientOriginalExtension());
                 $nomFichier = time() . '_' . uniqid() . '.' . $extension;
                 $file->move(public_path('images'), $nomFichier);
 
