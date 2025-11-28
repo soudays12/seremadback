@@ -10,7 +10,6 @@ class Commentaire extends Model
         'user_id',
         'publication_id',
         'message',
-        'user_id',
     ];
 
 

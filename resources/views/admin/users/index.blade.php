@@ -6,8 +6,7 @@
 <div class="max-w-5xl mx-auto">
   <div class="flex justify-between items-center mb-6">
     <h1 class="text-2xl font-bold">Utilisateurs</h1>
-    <a href="{{ route('admin.users')}}">
-        
+    <a href="{{ route('admin.index')}}">
         <button class="bg-green-500 px-3 py-2 text-white rounded-md">Retour</button>
     </a>
 

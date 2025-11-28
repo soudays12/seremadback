@@ -1,0 +1,33 @@
+/* Styles pour le slider hero */
+/* Animation d'entrée pour le texte */
+#heroSlider > div > div > div {
+    animation: slideInUp 1s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Amélioration des performances */
+#heroSlider > div {
+    will-change: transform, opacity;
+}
+
+/* Support du réduit de mouvement */
+@media (prefers-reduced-motion: reduce) {
+    #heroSlider > div,
+    .slide-indicator {
+        transition-duration: 0.1ms !important;
+    }
+    
+    .animate-bounce {
+        animation: none;
+    }
+}

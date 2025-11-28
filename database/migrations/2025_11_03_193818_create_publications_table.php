@@ -14,12 +14,12 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
-            $table->string('contenu');
-            $table->string('likes')->default(0);
+            $table->text('contenu');
+            $table->Integer('likes_count')->default(0);
+            $table->Integer('views')->default(0);
             $table->timestamps();
         });
     }
-
     /**
      * Reverse the migrations.
      */

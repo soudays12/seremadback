@@ -2,148 +2,6 @@
 
 @section('content')
 
-    <!-- HEADER -->
-    <header class="bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm sticky top-0 z-50 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between py-3">
-                <!-- Logo et nom -->
-                <div class="flex items-center gap-4 group cursor-pointer">
-                    <div class="relative">
-                        <img src="images/logo.png" alt="Logo SEREMAD" class="w-14 h-14 transform group-hover:scale-105 transition-transform duration-300">
-                        <div class="absolute inset-0 bg-blue-500 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">SEREMAD</h1>
-                        <p class="text-xs text-gray-500 font-medium">Nettoyage Professionnel</p>
-                    </div>
-                </div>
-
-                <!-- Navigation desktop -->
-                <nav class="hidden lg:flex items-center gap-8">
-                    <a href="#accueil" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group">
-                        Accueil
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group">
-                        Nos services
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#histoire" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group">
-                        Notre histoire
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#pourquoi" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group">
-                        Pourquoi nous
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-300 relative group">
-                        Contact
-                        <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
-                    </a>
-                </nav>
-
-                <!-- Actions utilisateur -->
-                <div class="flex items-center gap-4">
-                    @if(Auth::check())
-                        <div class="hidden md:flex items-center gap-3">
-                            <div class="flex items-center gap-2">
-                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full flex items-center justify-center">
-                                    <span class="text-white text-sm font-semibold">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                                </div>
-                                <span class="text-gray-700 font-medium">Bonjour, {{ Auth::user()->name }}</span>
-                            </div>
-                            <a href="{{ route('auth.logout') }}" 
-                            class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                                </svg>
-                                Déconnexion
-                            </a>
-                        </div>
-                    @else
-                        <div class="hidden md:flex items-center gap-4">
-                            <a href="{{ route('auth.login') }}" 
-                            class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                </svg>
-                                Espace Client
-                            </a>
-                            <a href="#contact" 
-                            class="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2.5 rounded-xl font-semibold transition-all duration-300">
-                                Devis Gratuit
-                            </a>
-                        </div>
-                    @endif
-
-                    <!-- Bouton menu mobile -->
-                    <button class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors duration-300 group">
-                        <span class="w-5 h-0.5 bg-gray-600 group-hover:bg-blue-600 transition-all duration-300 transform group-hover:rotate-45 group-hover:translate-y-1.5"></span>
-                        <span class="w-5 h-0.5 bg-gray-600 group-hover:bg-blue-600 transition-all duration-300 opacity-100 group-hover:opacity-0"></span>
-                        <span class="w-5 h-0.5 bg-gray-600 group-hover:bg-blue-600 transition-all duration-300 transform group-hover:-rotate-45 group-hover:-translate-y-1.5"></span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Navigation mobile (à activer avec JavaScript) -->
-            <div class="lg:hidden hidden bg-white border-t border-gray-100 py-4 px-4 shadow-lg">
-                <nav class="flex flex-col gap-4">
-                    <a href="#accueil" class="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300 border-b border-gray-100">
-                        Accueil
-                    </a>
-                    <a href="#services" class="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300 border-b border-gray-100">
-                        Nos services
-                    </a>
-                    <a href="#histoire" class="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300 border-b border-gray-100">
-                        Notre histoire
-                    </a>
-                    <a href="#pourquoi" class="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300 border-b border-gray-100">
-                        Pourquoi nous
-                    </a>
-                    <a href="#contact" class="text-gray-700 hover:text-blue-600 font-medium py-2 transition-colors duration-300 border-b border-gray-100">
-                        Contact
-                    </a>
-                    
-                    @if(Auth::check())
-                        <div class="pt-4 border-t border-gray-200">
-                            <div class="flex items-center gap-3 mb-4">
-                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full flex items-center justify-center">
-                                    <span class="text-white font-semibold">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
-                                </div>
-                                <div>
-                                    <p class="text-gray-700 font-medium">{{ Auth::user()->name }}</p>
-                                    <p class="text-sm text-gray-500">Connecté</p>
-                                </div>
-                            </div>
-                            <a href="{{ route('auth.logout') }}" 
-                            class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition-colors duration-300 flex items-center justify-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                                </svg>
-                                Déconnexion
-                            </a>
-                        </div>
-                    @else
-                        <div class="pt-4 border-t border-gray-200 flex flex-col gap-3">
-                            <a href="{{ route('auth.login') }}" 
-                            class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3 rounded-xl font-semibold transition-colors duration-300 flex items-center justify-center gap-2">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                </svg>
-                                Espace Client
-                            </a>
-                            <a href="#contact" 
-                            class="w-full border-2 border-blue-500 text-blue-600 hover:bg-blue-50 py-3 rounded-xl font-semibold transition-colors duration-300 text-center">
-                                Devis Gratuit
-                            </a>
-                        </div>
-                    @endif
-                </nav>
-            </div>
-        </div>
-    </header>
-
-
 
     <!-- section accueil -->
     <section class="relative overflow-hidden">
@@ -177,20 +35,20 @@
                             
                             <!-- Description -->
                             <p class="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed max-w-3xl">
-                                Prestation de nettoyage professionnelle pour entreprises et particuliers — 
+                                Chez SEREMAD, nous effectuons des prestations  de services de nettoyage professionnel pour entreprises et particuliers — 
                                 solutions sur mesure, personnel qualifié et équipements haute performance.
                             </p>
                             
                             <!-- Boutons d'action -->
                             <div class="flex flex-col sm:flex-row gap-4 mb-12">
-                                <a href="#en-savoir-plus"
+                                <a href="{{ route('services') }}"
                                     class="group bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white font-semibold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-2xl flex items-center justify-center gap-3">
                                     <span>Découvrir nos services</span>
                                     <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
                                     </svg>
                                 </a>
-                                <a href="{{ route('auth.login') }}"
+                                <a href="{{ route('contacts') }}#contact"
                                     class="group bg-white/10 backdrop-blur-sm border border-white/20 text-white hover:bg-white hover:text-gray-900 font-semibold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-3">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
@@ -255,12 +113,12 @@
                             </p>
                             
                             <p class="text-xl md:text-2xl text-gray-200 mb-10 leading-relaxed">
-                                Des solutions complètes adaptées aux besoins spécifiques des entreprises et particuliers, 
+                                Nous disposons de solutions complètes adaptées aux besoins spécifiques des entreprises et particuliers, 
                                 avec une équipe d'experts dédiée.
                             </p>
                             
                             <div class="flex justify-end gap-4 mb-12">
-                                <a href="#services"
+                                <a href="{{ route('services') }}"
                                     class="group bg-gradient-to-r from-green-600 to-emerald-500 hover:from-green-700 hover:to-emerald-600 text-white font-semibold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-2xl flex items-center justify-center gap-3">
                                     <span>Voir nos services</span>
                                     <svg class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -303,12 +161,12 @@
                             </p>
                             
                             <div class="flex justify-center gap-4">
-                                <a href="#contact"
+                                <a href="{{ route('contacts') }}#contact"
                                     class="group bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white font-semibold py-5 px-12 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-2xl flex items-center justify-center gap-3">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
                                     </svg>
-                                    <span>Contact Immédiat</span>
+                                    <span>Contactez rapide</span>
                                 </a>
                             </div>
                         </div>
@@ -348,100 +206,100 @@
             </div>
         </div>
     </section>
-    <style>
-        /* Animation d'entrée pour le texte */
-        #heroSlider > div > div > div {
-            animation: slideInUp 1s ease-out;
-        }
 
-        @keyframes slideInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Amélioration des performances */
-        #heroSlider > div {
-            will-change: transform, opacity;
-        }
-
-        /* Support du réduit de mouvement */
-        @media (prefers-reduced-motion: reduce) {
-            #heroSlider > div,
-            .slide-indicator {
-                transition-duration: 0.1ms !important;
-            }
-            
-            .animate-bounce {
-                animation: none;
-            }
-        }
-    </style>
     
-
 
     <main class="mx-auto  items-center">
 
         <!-- Section Qui sommes-nous -->
-        <section class="max-w-6xl mx-auto px-6 py-16 grid md:grid-cols-2 gap-10 items-center">
+        <section class="max-w-6xl mx-auto px-6 py-16 md:py-20 grid md:grid-cols-2 gap-12 md:gap-16 items-center">
             <!-- Texte à gauche -->
-            <div class="space-y-6">
-                <div>
-                    <h1 class="text-blue-600 font-semibold text-4xl flex items-center">
-                        Qui sommes nous ?
-                    </h1>
-                    <br>
-                    <p class="w-20 h-1 bg-linear-to-r from-blue-600 to-cyan-400  mr-2"></p>
+            <div class="space-y-6 md:space-y-8">
+                <div class="space-y-3">
+                    <span class="inline-block text-blue-600 font-semibold text-lg tracking-wider uppercase">À propos de nous</span>
+                    <div class="w-16 h-1.5 bg-gradient-to-r from-blue-600 to-cyan-400 rounded-full"></div>
                 </div>
-                <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
-                    Venez découvrir<br>notre histoire
+                
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight">
+                    Découvrez notre <span class="text-blue-600">histoire</span>
                 </h2>
-                <p class="text-gray-600 text-xl leading-relaxed">
-                    <strong>SEREMAD</strong> est une entreprise qui offre des services d’hygiène et de propreté
-                    aux professionnels mais aussi des prestations de nettoyage pour particuliers.
-                </p>
-                <button
-                    class="bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-5 rounded-full shadow-md hover:shadow-lg transition flex items-center space-x-2">
-                    <span>Lire plus</span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-                    </svg>
-                </button>
+                
+                <div class="space-y-4">
+                    <p class="text-gray-700 text-lg leading-relaxed">
+                        <strong class="text-blue-700">SEREMAD</strong> est une entreprise spécialisée dans les services d'hygiène et de propreté pour les professionnels, ainsi que dans les prestations de nettoyage pour les particuliers.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed">
+                        Forts de notre expertise et de notre engagement envers la qualité, nous nous efforçons de créer des environnements plus sains et agréables pour tous nos clients.
+                    </p>
+                </div>
+                
+                <div class="pt-2 flex flex-col sm:flex-row gap-4">
+                    <button class="group bg-gradient-to-r from-blue-500 to-blue-600 text-white px-8 py-4 rounded-full shadow-md hover:shadow-xl transition-all duration-300 flex items-center justify-center space-x-2 hover:from-blue-600 hover:to-blue-700 transform hover:-translate-y-1">
+                        <span class="font-medium">En savoir plus</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                        </svg>
+                    </button>
+                    
+                    <button class="group border-2 border-blue-500 text-blue-600 hover:bg-blue-50 px-8 py-4 rounded-full shadow-sm transition-all duration-300 flex items-center justify-center space-x-2">
+                        <span class="font-medium">Nos services</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Statistiques -->
+                <div class="pt-4 grid grid-cols-3 gap-4">
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-blue-600">10+</div>
+                        <div class="text-sm text-gray-600">Années d'expérience</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-2xl md:text-3xl font-bold text-blue-600">24/7</div>
+                        <div class="text-sm text-gray-600">Service disponible</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Carousel à droite -->
-            <div class="relative rounded-3xl overflow-hidden shadow-xl">
-                <img id="carousel-image"
-                    src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80"
-                    alt="Image SEREMAD" class="w-full h-[400px] object-cover transition-all duration-700">
+            <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+                <div id="carousel-container" class="relative w-full h-[450px] md:h-[500px] overflow-hidden">
+                    <img id="carousel-image" 
+                        src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" 
+                        alt="Services de nettoyage SEREMAD" 
+                        class="w-full h-full object-cover transition-all duration-700 ease-in-out transform group-hover:scale-105">
+                </div>
 
                 <!-- Boutons de navigation -->
                 <button id="prev-btn"
-                    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                    class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
                     </svg>
                 </button>
 
                 <button id="next-btn"
-                    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/70 hover:bg-white rounded-full p-2 shadow-md">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+                    class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-3 shadow-lg transition-all duration-300 opacity-0 group-hover:opacity-100 hover:scale-110">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-gray-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                     </svg>
                 </button>
 
                 <!-- Indicateurs -->
-                <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2" id="indicators"></div>
+                <div class="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2" id="indicators">
+                    <!-- Les indicateurs seront générés par JavaScript -->
+                </div>
+                
+                <!-- Overlay avec texte -->
+                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6 pt-12">
+                    <h3 class="text-white font-semibold text-lg">Services professionnels de nettoyage</h3>
+                    <p class="text-white/80 text-sm mt-1">Pour entreprises et particuliers</p>
+                </div>
             </div>
         </section>
+
+
 
         
         <!-- Logo Carousel animation - Design amélioré -->
@@ -460,77 +318,104 @@
             </div>
 
             <!-- Carrousel -->
-            <div class="relative">
+            <div class="relative max-w-4xl mx-auto">
                 <!-- Effets de dégradé sur les bords -->
-                <div class="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
-                <div class="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute left-0 top-0 bottom-0 w-16 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none"></div>
+                <div class="absolute right-0 top-0 bottom-0 w-16 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none"></div>
                 
-                <div
-                    x-data="{}"
-                    x-init="$nextTick(() => {
-                        let ul = $refs.logos;
-                        ul.insertAdjacentHTML('afterend', ul.outerHTML);
-                        ul.nextSibling.setAttribute('aria-hidden', 'true');
-                    })"
-                    class="w-full inline-flex flex-nowrap overflow-hidden">
-                    
-                    <ul x-ref="logos" class="flex items-center justify-center md:justify-start [&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
-                        <!-- Logo 1 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 1" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                <div class="overflow-hidden">
+                    <div class="flex animate-infinite-scroll">den">
+                        <!-- Première série de logos -->
+                        <div class="flex items-center justify-center whitespace-nowrap">
+                            <!-- Carrefour -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-blue-600 font-bold text-lg">CARREFOUR</div>
+                                </div>
                             </div>
-                        </li>
+                            
+                            <!-- Auchan -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-red-600 font-bold text-lg">AUCHAN</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Leclerc -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-blue-800 font-bold text-sm">E.LECLERC</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Intermarché -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-orange-600 font-bold text-sm">INTERMARCHÉ</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Casino -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-green-600 font-bold text-lg">CASINO</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Monoprix -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-purple-600 font-bold text-sm">MONOPRIX</div>
+                                </div>
+                            </div>
+                        </div>
                         
-                        <!-- Logo 2 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 2" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                        <!-- Duplication pour l'effet infini -->
+                        <div class="flex items-center justify-center whitespace-nowrap">
+                            <!-- Carrefour -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-blue-600 font-bold text-lg">CARREFOUR</div>
+                                </div>
                             </div>
-                        </li>
-                        
-                        <!-- Logo 3 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 3" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                            
+                            <!-- Auchan -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-red-600 font-bold text-lg">AUCHAN</div>
+                                </div>
                             </div>
-                        </li>
-                        
-                        <!-- Logo 4 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 4" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                            
+                            <!-- Leclerc -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-blue-800 font-bold text-sm">E.LECLERC</div>
+                                </div>
                             </div>
-                        </li>
-                        
-                        <!-- Logo 5 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 5" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                            
+                            <!-- Intermarché -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-orange-600 font-bold text-sm">INTERMARCHÉ</div>
+                                </div>
                             </div>
-                        </li>
-                        
-                        <!-- Logo 6 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 6" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                            
+                            <!-- Casino -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-green-600 font-bold text-lg">CASINO</div>
+                                </div>
                             </div>
-                        </li>
-                        
-                        <!-- Logo 7 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 7" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
+                            
+                            <!-- Monoprix -->
+                            <div class="mx-6 group">
+                                <div class="w-28 h-16 bg-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 border border-gray-100 flex items-center justify-center p-3">
+                                    <div class="text-purple-600 font-bold text-sm">MONOPRIX</div>
+                                </div>
                             </div>
-                        </li>
-                        
-                        <!-- Logo 8 -->
-                        <li class="group">
-                            <div class="w-32 h-20 bg-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-500 border border-gray-100 flex items-center justify-center p-4 transform hover:scale-105">
-                                <img src="images/logo.png" alt="Client 8" class="max-h-10 w-auto grayscale group-hover:grayscale-0 transition-all duration-500 opacity-80 group-hover:opacity-100" />
-                            </div>
-                        </li>
-                    </ul>
+                        </div>olor">
+
+                    </div>
                 </div>
             </div>
 
@@ -543,32 +428,7 @@
             </div>
         </div>
 
-        <style>
-            @keyframes infinite-scroll {
-                from {
-                    transform: translateX(0);
-                }
-                to {
-                    transform: translateX(calc(-100% - 2rem));
-                }
-            }
 
-            .animate-infinite-scroll {
-                animation: infinite-scroll 40s linear infinite;
-            }
-
-            /* Pause l'animation au survol */
-            .group:hover .animate-infinite-scroll {
-                animation-play-state: paused;
-            }
-
-            /* Support du réduit de mouvement */
-            @media (prefers-reduced-motion: reduce) {
-                .animate-infinite-scroll {
-                    animation: none;
-                }
-            }
-        </style>
 
 
         <!-- Nos services -->
@@ -866,9 +726,6 @@
 
         <!-- Lucide Icons -->
         <script src="https://unpkg.com/lucide@latest"></script>
-        <script>
-            lucide.createIcons();
-        </script>
 
         <!-- Section Publications -->
         <section class="py-20 bg-gradient-to-br from-blue-900 via-blue-700 to-cyan-800 relative overflow-hidden">
@@ -899,9 +756,16 @@
                     <div class="group bg-white rounded-2xl shadow-2xl hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full">
                         <!-- Image avec overlay -->
                         <div class="relative overflow-hidden">
-                            <img src="gallery/IMG-20251029-WA0020.jpg" 
-                                alt="{{ $publication->titre }}"
-                                class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            @if($publication->images->count() > 0)
+                                <img src="{{ asset('images/' . $publication->images->first()->fichier) }}" 
+                                    alt="{{ $publication->titre }}"
+                                    class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            @else
+                                <img src="gallery/IMG-20251029-WA0020.jpg" 
+                                    alt="{{ $publication->titre }}"
+                                    class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                            @endif
+
                             <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                             <div class="absolute top-4 right-4">
                                 <span class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
@@ -938,6 +802,44 @@
                                 </p>
                             </div>
 
+
+
+                            <!-- popup pour ajouter les commentaires -->
+                            <div id="modalOverlay"
+                                class="fixed inset-0 bg-black bg-opacity-40 hidden items-center justify-center">
+                                <!-- Popup -->
+                                <div class="bg-white w-[650px] rounded shadow-lg relative">
+                                    <!-- Contenu -->
+                                    <div class="max-h-[500px] overflow-y-auto p-4" style="we">
+                                        <form id="candidateForm" action="{{ route('user.comment') }}" method="post" enctype="multipart/form-data" class="space-y-6" novalidate>
+                                            @csrf
+                                            
+                                            <!-- Description -->
+                                            <label class="block">
+                                                <span class="text-sm font-medium text-gray-700">Votre commentaire</span>
+                                                <textarea 
+                                                    name="description" 
+                                                    rows="4"
+                                                    required
+                                                    placeholder="Ajoutez votre commentaire ici "
+                                                    class="mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-indigo-400 resize-none"
+                                                ></textarea>
+                                            </label>
+
+                                            <!-- Bouton de soumission -->
+                                            <button type="submit"
+                                                class="w-full inline-flex justify-center items-center gap-2 px-4 py-2 rounded-md bg-indigo-600 text-white font-medium shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 transition">
+                                                <i class='bx bx-plus-circle text-lg'></i>
+                                                Soumettre mon commentaire
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
                             <!-- Actions -->
                             <div class="flex justify-between items-center pt-4 border-t border-gray-100">
                                 <div class="flex space-x-4 text-gray-500 text-sm">
@@ -948,19 +850,12 @@
                                         </div>
                                         <span>Voir</span>
                                     </a>
-                                    <a href="#" 
+                                    <a href="#" id="openModal"
                                     class="flex items-center gap-2 hover:text-green-600 transition-colors duration-300 group/action">
                                         <div class="p-1 bg-green-50 rounded-lg group-hover/action:bg-green-100 transition-colors">
                                             <i class='bx bx-message-square text-lg'></i>
                                         </div>
                                         <span>Commenter</span>
-                                    </a>
-                                    <a href="#" 
-                                    class="flex items-center gap-2 hover:text-purple-600 transition-colors duration-300 group/action">
-                                        <div class="p-1 bg-purple-50 rounded-lg group-hover/action:bg-purple-100 transition-colors">
-                                            <i class='bx bx-share-alt text-lg'></i>
-                                        </div>
-                                        <span>Partager</span>
                                     </a>
                                 </div>
                                 

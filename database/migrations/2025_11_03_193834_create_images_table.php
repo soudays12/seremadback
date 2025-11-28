@@ -13,6 +13,7 @@ return new class extends Migration
             $table->string('nom');
             $table->integer('taille');
             $table->string('format');
+            $table->string('fichier');
             $table->foreignId('publication_id')->constrained('publications')->onDelete('cascade'); 
             $table->timestamps();
         });

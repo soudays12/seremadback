@@ -10,11 +10,12 @@ class Image extends Model
         "nom",
         "taille", 
         "format",
+        "fichier",
         "publication_id",
     ];
 
 
-     public function publication(){
-        $this->BelongsTo(Publication::class);
+    public function publication(){
+        return $this->belongsTo(Publication::class);
     }
 }

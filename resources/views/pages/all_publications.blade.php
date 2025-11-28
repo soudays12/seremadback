@@ -2,61 +2,94 @@
 
 @section('content')
 
-    <!-- HEADER -->
-    <header class="bg-white border-b">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <img src="images/logo.png" alt="" class="w-16" srcset="">
-                <div>
-                    <h1 class="text-lg font-bold">SEREMAD</h1>
-                    <p class="text-xs text-gray-500">Service de nettoyage</p>
+<!-- Hero Section avec illustration -->
+<section class="relative bg-gradient-to-br from-blue-600 via-cyan-500 to-blue-700 text-white py-20 overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <!-- Éléments décoratifs -->
+    <div class="absolute top-10 right-10 w-32 h-32 bg-white/10 rounded-full animate-pulse"></div>
+    <div class="absolute bottom-20 left-10 w-24 h-24 bg-cyan-300/20 rounded-full animate-bounce"></div>
+    <div class="absolute top-1/3 right-1/4 w-16 h-16 bg-blue-200/30 rounded-full opacity-50"></div>
+    
+    <div class="relative max-w-7xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="text-center lg:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-semibold mb-6">
+                    <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                        <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                    </svg>
+                    Blog & Actualités
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6">
+                    Nos <span class="text-cyan-300">Publications</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-blue-100 mb-8">
+                    Découvrez nos conseils, actualités et innovations dans le nettoyage professionnel
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#publications" class="bg-white text-blue-600 px-8 py-4 rounded-xl font-semibold hover:bg-gray-100 transition-all duration-300 transform hover:scale-105">
+                        Voir les articles
+                    </a>
+                    <a href="{{ route('home') }}" class="border-2 border-white text-white hover:bg-white hover:text-blue-600 px-8 py-4 rounded-xl font-semibold transition-all duration-300">
+                        Retour accueil
+                    </a>
                 </div>
             </div>
-
-            <nav class="hidden md:flex gap-6 items-center text-sm">
-                <a href="#services" class="hover:underline text-lg">Nos services</a>
-                <a href="#histoire" class="hover:underline text-lg">Notre histoire</a>
-                <a href="#pourquoi" class="hover:underline text-lg">Pourquoi nous</a>
-                <a href="#contact" class="bg-blue-500 text-white text-lg p-2 rounded-md shadow-sm">Contactez-nous</a>
-            </nav>
-
-            <button class="md:hidden px-3 py-2 border rounded-md">☰</button>
-        </div>
-    </header>
-
-    <section class="relative bg-cover bg-center"
-        style="background-image: url('images/plein-coup-homme-poussant-le-bouton-de-l-ascenseur.png');">
-        <div class="relative flex bg-gray-700 bg-opacity-70 ">
-            <div class="max-w-6xl mx-auto  p-20   text-white">
-                <!-- Titre principal -->
-                <h1 class="text-5xl md:text-6xl font-bold mb-6">
-                    <span class="text-white">Nos publications et actualités</span>
-                </h1>
+            <div class="relative">
+                <div class="absolute inset-0 bg-gradient-to-r from-cyan-400 to-blue-400 rounded-2xl transform rotate-3"></div>
+                <img src="/images/plein-coup-homme-poussant-le-bouton-de-l-ascenseur.png" alt="Publications SEREMAD" 
+                     class="relative w-full h-96 object-cover rounded-2xl shadow-2xl">
             </div>
-
         </div>
-    </section>
-    <main class=" mx-auto p-10 items-center">
-            <!-- Bouton retour -->
-            <a href="{{ route('user.back') }}" 
-               class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 font-medium transition-colors duration-300">
+    </div>
+</section>
+<!-- Section Publications -->
+<section id="publications" class="py-20 bg-gradient-to-br from-gray-50 to-blue-50 relative overflow-hidden">
+    <!-- Éléments décoratifs -->
+    <div class="absolute top-10 left-10 w-20 h-20 bg-blue-100 rounded-full opacity-30 animate-pulse"></div>
+    <div class="absolute bottom-20 right-16 w-16 h-16 bg-cyan-100 rounded-full opacity-40 animate-bounce"></div>
+    
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+        <!-- En-tête -->
+        <div class="text-center mb-16">
+            <span class="inline-block px-4 py-2 bg-blue-100 text-blue-700 rounded-full text-sm font-semibold mb-4">
+                Actualités & Conseils
+            </span>
+            <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                Toutes nos <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Publications</span>
+            </h2>
+            <div class="w-24 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 mx-auto mb-6 rounded-full"></div>
+            <p class="text-gray-600 text-xl max-w-2xl mx-auto leading-relaxed">
+                Restez informé de nos dernières actualités et découvrez nos conseils d'experts
+            </p>
+        </div>
+
+        <!-- Bouton retour stylisé -->
+        <div class="mb-12">
+            <a href="{{ route('home') }}" 
+               class="inline-flex items-center gap-3 bg-white hover:bg-gray-50 text-gray-700 hover:text-blue-600 font-semibold px-6 py-3 rounded-xl shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1 border border-gray-200">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
                 </svg>
-                Retour
+                <span>Retour à l'accueil</span>
             </a>
-            <br><br>
+        </div>
 
-            <!-- Grille des publications -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Grille des publications -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($publications as $publication)
                 <!-- Publication Card -->
                 <div class="group bg-white rounded-2xl shadow-2xl hover:shadow-xl transition-all duration-500 transform hover:-translate-y-2 overflow-hidden flex flex-col h-full">
                     <!-- Image avec overlay -->
                     <div class="relative overflow-hidden">
-                        <img src="gallery/IMG-20251029-WA0020.jpg" 
-                            alt="{{ $publication->titre }}"
-                            class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        @if($publication->images->count() > 0)
+                            <img src="{{ asset('images/' . $publication->images->first()->fichier) }}" 
+                                alt="{{ $publication->titre }}"
+                                class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        @else
+                            <img src="gallery/IMG-20251029-WA0020.jpg" 
+                                alt="{{ $publication->titre }}"
+                                class="w-full h-48 object-cover transform group-hover:scale-105 transition-transform duration-500">
+                        @endif
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                         <div class="absolute top-4 right-4">
                             <span class="px-3 py-1 bg-blue-600 text-white text-xs font-semibold rounded-full backdrop-blur-sm">
@@ -132,10 +165,42 @@
                 </div>
                 @endforeach
 
-            </div>
-
         </div>
-    </main>
+
+        <!-- Statistiques -->
+        <div class="mt-16 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                    <div class="text-3xl font-bold text-blue-600 mb-2">{{ count($publications) }}+</div>
+                    <div class="text-gray-600">Articles publiés</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                    <div class="text-3xl font-bold text-cyan-600 mb-2">{{ $totalViews ?? '0' }}+</div>
+                    <div class="text-gray-600">Lectures totales</div>
+                </div>
+                <div class="bg-white rounded-2xl p-6 shadow-lg border border-gray-100">
+                    <div class="text-3xl font-bold text-green-600 mb-2">{{ $totalComments ?? '0' }}+</div>
+                    <div class="text-gray-600">Commentaires</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation -->
+        <div class="mt-16 text-center">
+            <div class="inline-flex flex-wrap gap-4 justify-center">
+                <a href="{{ route('home') }}" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300">
+                    Accueil
+                </a>
+                <a href="{{ route('services') }}" class="bg-cyan-600 hover:bg-cyan-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300">
+                    Nos services
+                </a>
+                <a href="{{ route('contacts') }}#contact" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl font-medium transition-all duration-300">
+                    Contact
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 @endsection

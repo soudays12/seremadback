@@ -75,9 +75,12 @@
 
     <!-- Bouton de déconnexion -->
     <div class="text-center mt-12">
-      <button class="bg-red-600 text-white px-8 py-3 rounded-xl font-semibold shadow hover:bg-red-700 transition">
-        Déconnexion
-      </button>
+      <form method="POST" action="{{ route('adminauth.logout') }}">
+        @csrf
+        <button type="submit" class="bg-red-600 text-white px-8 py-3 rounded-xl font-semibold shadow hover:bg-red-700 transition">
+          Déconnexion
+        </button>
+      </form>
     </div>
   </main>
 

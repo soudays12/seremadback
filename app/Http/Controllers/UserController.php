@@ -29,6 +29,6 @@ class UserController extends Controller
         ]);
  
         // Redirection après l'inscription
-        return redirect()->route('login')->with('success', 'Inscription réussie !');
+        return redirect()->route('auth.login')->with('success', 'Inscription réussie !');
     }
 }

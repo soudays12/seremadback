@@ -19,6 +19,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        $this->loadAdminRoutes();
+    }
+
+    protected function loadAdminRoutes()
+    {
+        if (file_exists(base_path('routes/admin.php'))) {
+            require base_path('routes/admin.php');
+        }
     }
 }

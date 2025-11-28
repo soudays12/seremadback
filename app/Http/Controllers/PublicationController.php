@@ -3,81 +3,76 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Models\Publication;
+use App\Models\Image;
+use Illuminate\Validation\ValidationException;
+use Illuminate\Database\QueryException;
+use Exception;
 
 class PublicationController extends Controller
 {
-
-
-
     public function store(Request $request)
     {
         try {
-            // 1️⃣ Validation des données
-            $request->validate([
-                'titre' => 'required|string|max:255',
-                'description' => 'required|string|max:255',
+            // validation
+            $validated = $request->validate([
+                'titre'   => 'required|string|max:255',
+                'contenu' => 'required|string', // laisser text sans max si souhaité
+                'image'   => 'nullable|image|max:2048',
             ]);
 
-            // 2️⃣ Transaction : on fait tout ou rien
-            DB::transaction(function () use ($request) {
-                // 📁 Récupération du fichier envoyé
+            DB::transaction(function () use ($validated, $request) {
                 $file = $request->file('image');
+                $nomOriginal = $taille = $extension = $nomFichier = null;
 
-                // 📄 Infos du fichier
-                $nomOriginal = $file->getClientOriginalName();
-                $taille = $file->getSize();
-                $extension = $file->getClientOriginalExtension();
+                if ($file) {
+                    $nomOriginal = $file->getClientOriginalName();
+                    $taille = $file->getSize();
+                    $extension = $file->getClientOriginalExtension();
+                    $nomFichier = time() . '_' . uniqid() . '.' . $extension;
+                    // s'assurer que le dossier existe et est accessible
+                    if (!is_dir(public_path('images'))) {
+                        mkdir(public_path('images'), 0755, true);
+                    }
+                    $file->move(public_path('images'), $nomFichier);
+                }
 
-                // 🔠 Nom unique pour le stockage
-                $nomFichier = time() . '_' . uniqid() . '.' . $extension;
-
-                // 📦 Déplacement du fichier vers public/images
-                $file->move(public_path('images'), $nomFichier);
-
-                // 🧍 Créer et sauvegarder le candidat
                 $publication = Publication::create([
-                    'titre' => $request->titre,
-                    'contenu' => $request->contenu,
+                    'titre'   => $validated['titre'],
+                    'contenu' => $validated['contenu'],
                 ]);
 
-                // 🖼️ Créer l'image liée
-                Image::create([
-                    'nom' => $nomOriginal,
-                    'taille' => $taille,
-                    'format' => $extension,
-                    'publication_id' => $publication->id,
-                ]);
+                if ($file && isset($nomFichier)) {
+                    Image::create([
+                        'nom'            => $nomOriginal,
+                        'taille'         => $taille,
+                        'format'         => $extension,
+                        'fichier'        => $nomFichier,
+                        'publication_id' => $publication->id,
+                    ]);
+                }
             });
 
-            // ✅ Succès
-            return redirect()->back()->with('success', 'Publication effectué avec succès !');
+            return redirect()->route('admin.publications.index')->with('success', 'Publication effectuée avec succès !');
 
         } catch (ValidationException $e) {
-            // ❌ Erreur de validation
             return redirect()->back()
                 ->withErrors($e->errors())
                 ->withInput()
-                ->with('error', 'Erreur de validation des données : ' . $e->getMessage());
+                ->with('error', 'Erreur de validation');
 
         } catch (QueryException $e) {
-            // ❌ Erreur de base de données
             \Log::error('Erreur DB lors de la création de la publication : ' . $e->getMessage());
-            
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Erreur de base de données lors de la création de la publication ; ' . $e->getMessage());
+                ->with('error', 'Erreur de base de données');
 
         } catch (Exception $e) {
-            // ❌ Erreur générale
             \Log::error('Erreur générale lors de la création de la publication: ' . $e->getMessage());
-            
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Une erreur inattendue est survenue. Veuillez réessayer ; ' . $e->getMessage());
+                ->with('error', 'Une erreur inattendue est survenue');
         }
     }
-
-
-
-
 }

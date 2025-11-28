@@ -13,7 +13,7 @@ class AdminPublicationController extends Controller
 {
     public function index()
     {
-        $publications = Publication::latest()->paginate(10);
+        $publications = Publication::with('images')->latest()->paginate(10);
         return view('admin.publications.index', compact('publications'));
     }
 
@@ -29,34 +29,32 @@ class AdminPublicationController extends Controller
             $validated = $request->validate([
                 'titre'   => 'required|string|max:255',
                 'contenu' => 'required|string',
-                'image'   => 'nullable|image|max:2048',
+                'images'   => 'nullable|array',
+                'images.*' => 'image|max:2048',
             ]);
 
             DB::transaction(function () use ($validated, $request) {
-                $file = $request->file('image');
-                $nomOriginal = $taille = $extension = $nomFichier = null;
-
-                if ($file) {
-                    $nomOriginal = $file->getClientOriginalName();
-                    $taille = $file->getSize();
-                    $extension = $file->getClientOriginalExtension();
-                    $nomFichier = time() . '_' . uniqid() . '.' . $extension;
-                    $file->move(public_path('images'), $nomFichier);
-                }
-
                 $publication = Publication::create([
                     'titre'   => $validated['titre'],
                     'contenu' => $validated['contenu'],
                 ]);
 
-                if ($file) {
-                    Image::create([
-                        'nom'            => $nomOriginal,
-                        'taille'         => $taille,
-                        'format'         => $extension,
-                        'fichier'        => $nomFichier,
-                        'publication_id' => $publication->id,
-                    ]);
+                if ($request->hasFile('images')) {
+                    foreach ($request->file('images') as $file) {
+                        $nomOriginal = $file->getClientOriginalName();
+                        $taille = $file->getSize();
+                        $extension = $file->getClientOriginalExtension();
+                        $nomFichier = time() . '_' . uniqid() . '.' . $extension;
+                        $file->move(public_path('images'), $nomFichier);
+
+                        Image::create([
+                            'nom'            => $nomOriginal,
+                            'taille'         => $taille,
+                            'format'         => $extension,
+                            'fichier'        => $nomFichier,
+                            'publication_id' => $publication->id,
+                        ]);
+                    }
                 }
             });
 
@@ -78,24 +76,50 @@ class AdminPublicationController extends Controller
 
     public function show(Publication $publication)
     {
+        $publication->load('images');
         return view('admin.publications.show', compact('publication'));
     }
 
     public function edit(Publication $publication)
     {
+        $publication->load('images');
         return view('admin.publications.edit', compact('publication'));
     }
 
     public function update(Request $request, Publication $publication)
     {
-        $data = $request->validate([
-            'title' => 'required|string|max:255',
-            'body'  => 'required|string',
+        $validated = $request->validate([
+            'titre' => 'required|string|max:255',
+            'contenu'  => 'required|string',
+            'images' => 'nullable|array',
+            'images.*' => 'image|max:2048',
         ]);
 
-        $publication->update($data);
+        $publication->update([
+            'titre' => $validated['titre'],
+            'contenu' => $validated['contenu'],
+        ]);
+        
+        // Ajouter de nouvelles images si présentes
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $file) {
+                $nomOriginal = $file->getClientOriginalName();
+                $taille = $file->getSize();
+                $extension = $file->getClientOriginalExtension();
+                $nomFichier = time() . '_' . uniqid() . '.' . $extension;
+                $file->move(public_path('images'), $nomFichier);
 
-        return redirect()->route('admin.publications.index')->with('success', 'Publication mise à jour.');
+                Image::create([
+                    'nom' => $nomOriginal,
+                    'taille' => $taille,
+                    'format' => $extension,
+                    'fichier' => $nomFichier,
+                    'publication_id' => $publication->id,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.publications.show', $publication)->with('success', 'Publication mise à jour avec succès.');
     }
 
     public function destroy(Publication $publication)

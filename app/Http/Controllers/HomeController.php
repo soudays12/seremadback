@@ -10,36 +10,21 @@ class HomeController extends Controller
 
     public function home()
     {
-        $publications = Publication::latest()->limit(3)->get();
+        $publications = Publication::with('images')->latest()->limit(3)->get();
         return view('pages.home', compact('publications'));
     }
 
 
-    // Publication detail page
     public function publication(Request $request, Publication $publication){
-
+        // Charger la publication avec ses images et commentaires
+        $publication->load(['images', 'comments.user']);
+        
         // Incrémenter le compteur de vues
-        // $publication->increment('views');
+        $publication->increment('views');
         
-        // Charger les commentaires avec les utilisateurs
-        // $publication->load(['comments.user', 'comments' => function($query) {
-        //     $query->latest();
-        // }]);
+        $publication_infos = $publication;
         
-        // Charger le nombre de likes
-        // $publication->loadCount(['likes', 'comments']);
-        
-        // Publications similaires (par catégorie ou tags)
-        $publication_infos = $request-> $publication;
-        // $relatedPublications = Publication::where('id', '!=', $publication_infos->id)
-        //     ->where('category', $publication_infos->category)
-        //     ->orWhere('titre', 'like', '%' . $publication_infos->titre . '%')
-        //     ->limit(2)
-        //     ->get();
-        
-        // return view('pages.publicationitem', compact('publication_infos', 'relatedPublications'));
         return view('pages.publicationitem', compact('publication_infos'));
-
     }
 
     // 
@@ -55,13 +40,9 @@ class HomeController extends Controller
     
     // All publications page
     public function allpublications(){
-        $publications = Publication::all();
+        $publications = Publication::with('images')->latest()->get();
         return view('pages.all_publications',compact('publications'));
     }
-
-
-
-
 
     public function back(){
         return redirect()->back();

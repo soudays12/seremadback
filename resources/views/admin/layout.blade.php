@@ -6,9 +6,8 @@
   <title>Tableau de bord | Seremad</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-@vite('resources/css/app.css','resources/js/app.js','resources/fontawesome/css/all.min.css')
       
-<body class="bg-gray-100 font-sans text-gray-800">
+<body class="bg-gray-100 font-sans text-gray-800 scroll-smooth">
   @if(session('success'))
     <script>
         Swal.fire({

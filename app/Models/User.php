@@ -19,8 +19,16 @@ class User extends Authenticatable
         'password',
     ];
 
-     public function commentaire(){
-        $this->hasMany(Commentaire::class);
+     public function commentaires(){
+        return $this->hasMany(Commentaire::class);
+    }
+    
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+    
+    public function likes(){
+        return $this->hasMany(Like::class);
     }
 
     

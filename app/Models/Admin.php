@@ -3,13 +3,27 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
 
-class Admin extends Model
+class Admin extends Model implements Authenticatable
 {
+    use AuthenticatableTrait;
+    
+    protected $table = 'admins';
     protected $fillable = [
-        'npm',
+        'nom',
         'prenom',
         'email',
         'password',
+    ];
+
+    protected $hidden = [
+        'password',
+    ];
+
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'password' => 'hashed',
     ];
 }

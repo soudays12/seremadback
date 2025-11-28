@@ -5,11 +5,40 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>SEREMAD — Service de nettoyage</title>
+    
+    <!-- Balises Meta SEO -->
+    <meta name="description" content="SEREMAD - Service professionnel de nettoyage pour entreprises et particuliers. Nettoyage écologique, fiable et de qualité. Devis gratuit.">
+    <meta name="keywords" content="nettoyage, service nettoyage, nettoyage professionnel, entreprise nettoyage, nettoyage bureaux, nettoyage particuliers, SEREMAD">
+    <meta name="author" content="SEREMAD">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="fr">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="{{ url()->current() }}">
+    <meta property="og:title" content="SEREMAD — Service de nettoyage professionnel">
+    <meta property="og:description" content="Service professionnel de nettoyage pour entreprises et particuliers. Équipements écologiques, service 24h/24.">
+    <meta property="og:image" content="{{ asset('images/logo.png') }}">
+    <meta property="og:site_name" content="SEREMAD">
+    <meta property="og:locale" content="fr_FR">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="{{ url()->current() }}">
+    <meta property="twitter:title" content="SEREMAD — Service de nettoyage professionnel">
+    <meta property="twitter:description" content="Service professionnel de nettoyage pour entreprises et particuliers. Équipements écologiques, service 24h/24.">
+    <meta property="twitter:image" content="{{ asset('images/logo.png') }}">
+    
+    <!-- Balises techniques -->
+    <meta name="theme-color" content="#2563eb">
+    <meta name="msapplication-TileColor" content="#2563eb">
+    <link rel="canonical" href="{{ url()->current() }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
     <!-- carousel slider -->
     <link rel="stylesheet" href="css/carousel.css">
     <link rel="stylesheet" href="css/swiper.css">
+    <link rel="stylesheet" href="{{ asset('css/hero-slider.css') }}">
     <link rel="stylesheet" href="{{ asset('fontawesome/css/all.min.css') }}">
 
     <!-- SweetAlert CSS -->
@@ -23,9 +52,13 @@
 
     <!-- Tailwind CDN (vite pour prototype) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ asset('css/carousel.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 </head>
 
-<body class="bg-gray-50 text-gray-800 antialiased">
+<body class="bg-gray-50 text-gray-800 antialiased scroll-smooth">
     @if(session('success'))
         <script>
             Swal.fire({
@@ -45,6 +78,147 @@
             });
         </script>
     @endif
+
+    <!-- HEADER -->
+    <header class="bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between py-3">
+                <!-- Logo et nom -->
+                <div class="flex items-center gap-4 group cursor-pointer">
+                    <div class="relative">
+                        <img src="images/logo.png" alt="Logo SEREMAD" class="w-14 h-14 transform group-hover:scale-105 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-blue-500 rounded-full opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                    </div>
+                    <div>
+                        <h1 class="text-xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">SEREMAD</h1>
+                        <p class="text-xs text-gray-500 font-medium">Nettoyage Professionnel</p>
+                    </div>
+                </div>
+
+                <!-- Navigation desktop -->
+                <nav class="hidden lg:flex items-center gap-8">
+                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-blue-600' : 'text-gray-700' }} hover:text-blue-600 font-medium transition-colors duration-300 relative group">
+                        Accueil
+                        <span class="absolute bottom-0 left-0 {{ request()->routeIs('home') ? 'w-full' : 'w-0' }} h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-blue-600' : 'text-gray-700' }} hover:text-blue-600 font-medium transition-colors duration-300 relative group">
+                        Nos services
+                        <span class="absolute bottom-0 left-0 {{ request()->routeIs('services') ? 'w-full' : 'w-0' }} h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="{{ route('user.allpublications')}}" class="{{ request()->routeIs('user.allpublications') || request()->routeIs('user.publication') ? 'text-blue-600' : 'text-gray-700' }} hover:text-blue-600 font-medium transition-colors duration-300 relative group">
+                        Blog
+                        <span class="absolute bottom-0 left-0 {{ request()->routeIs('user.allpublications') || request()->routeIs('user.publication') ? 'w-full' : 'w-0' }} h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-blue-600' : 'text-gray-700' }} hover:text-blue-600 font-medium transition-colors duration-300 relative group">
+                        A propos
+                        <span class="absolute bottom-0 left-0 {{ request()->routeIs('about') ? 'w-full' : 'w-0' }} h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                    <a href="{{ route('contacts') }}" class="{{ request()->routeIs('contacts') ? 'text-blue-600' : 'text-gray-700' }} hover:text-blue-600 font-medium transition-colors duration-300 relative group">
+                        Contacts
+                        <span class="absolute bottom-0 left-0 {{ request()->routeIs('contacts') ? 'w-full' : 'w-0' }} h-0.5 bg-blue-600 group-hover:w-full transition-all duration-300"></span>
+                    </a>
+                </nav>
+
+                <!-- Actions utilisateur -->
+                <div class="flex items-center gap-4">
+                    @if(Auth::check())
+                        <div class="hidden md:flex items-center gap-3">
+                            <div class="flex items-center gap-2">
+                                <div class="w-8 h-8 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white text-sm font-semibold">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                                </div>
+                                <span class="text-gray-700 font-medium">Bonjour, {{ Auth::user()->name }}</span>
+                            </div>
+                            <a href="{{ route('auth.logout') }}" 
+                            class="bg-gradient-to-r from-red-500 to-pink-600 hover:from-red-600 hover:to-pink-700 text-white px-5 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                Déconnexion
+                            </a>
+                        </div>
+                    @else
+                        <div class="hidden md:flex items-center gap-4">
+                            <a href="{{ route('auth.login') }}" 
+                            class="bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 transform hover:scale-105 shadow-md hover:shadow-lg flex items-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                Espace Client
+                            </a>
+                            <a href="{{ route('contacts') }}#contact" 
+                            class="border-2 border-blue-500 text-blue-600 hover:bg-blue-50 px-6 py-2.5 rounded-xl font-semibold transition-all duration-300">
+                                Devis Gratuit
+                            </a>
+                        </div>
+                    @endif
+
+                    <!-- Bouton menu mobile -->
+                    <button id="mobile-menu-button" class="lg:hidden w-10 h-10 flex flex-col items-center justify-center gap-1.5 rounded-lg border border-gray-200 hover:border-gray-300 transition-colors duration-300 group">
+                        <span class="w-5 h-0.5 bg-gray-600 group-hover:bg-blue-600 transition-all duration-300"></span>
+                        <span class="w-5 h-0.5 bg-gray-600 group-hover:bg-blue-600 transition-all duration-300"></span>
+                        <span class="w-5 h-0.5 bg-gray-600 group-hover:bg-blue-600 transition-all duration-300"></span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Navigation mobile -->
+            <div id="mobile-menu" class="lg:hidden hidden bg-white border-t border-gray-100 py-4 px-4 shadow-lg">
+                <nav class="flex flex-col gap-4">
+                    <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'text-blue-600 bg-blue-50' : 'text-gray-700' }} hover:text-blue-600 font-medium py-2 px-3 rounded transition-colors duration-300 border-b border-gray-100">
+                        Accueil
+                    </a>
+                    <a href="{{ route('services') }}" class="{{ request()->routeIs('services') ? 'text-blue-600 bg-blue-50' : 'text-gray-700' }} hover:text-blue-600 font-medium py-2 px-3 rounded transition-colors duration-300 border-b border-gray-100">
+                        Nos services
+                    </a>
+                    <a href="{{ route('user.allpublications') }}" class="{{ request()->routeIs('user.allpublications') || request()->routeIs('user.publication') ? 'text-blue-600 bg-blue-50' : 'text-gray-700' }} hover:text-blue-600 font-medium py-2 px-3 rounded transition-colors duration-300 border-b border-gray-100">
+                        Blog
+                    </a>
+                    <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'text-blue-600 bg-blue-50' : 'text-gray-700' }} hover:text-blue-600 font-medium py-2 px-3 rounded transition-colors duration-300 border-b border-gray-100">
+                        À propos
+                    </a>
+                    <a href="{{ route('contacts') }}" class="{{ request()->routeIs('contacts') ? 'text-blue-600 bg-blue-50' : 'text-gray-700' }} hover:text-blue-600 font-medium py-2 px-3 rounded transition-colors duration-300 border-b border-gray-100">
+                        Contacts
+                    </a>
+                    
+                    @if(Auth::check())
+                        <div class="pt-4 border-t border-gray-200">
+                            <div class="flex items-center gap-3 mb-4">
+                                <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full flex items-center justify-center">
+                                    <span class="text-white font-semibold">{{ strtoupper(substr(Auth::user()->name, 0, 1)) }}</span>
+                                </div>
+                                <div>
+                                    <p class="text-gray-700 font-medium">{{ Auth::user()->name }}</p>
+                                    <p class="text-sm text-gray-500">Connecté</p>
+                                </div>
+                            </div>
+                            <a href="{{ route('auth.logout') }}" 
+                            class="w-full bg-red-500 hover:bg-red-600 text-white py-3 rounded-xl font-semibold transition-colors duration-300 flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                </svg>
+                                Déconnexion
+                            </a>
+                        </div>
+                    @else
+                        <div class="pt-4 border-t border-gray-200 flex flex-col gap-3">
+                            <a href="{{ route('auth.login') }}" 
+                            class="w-full bg-gradient-to-r from-blue-600 to-cyan-500 hover:from-blue-700 hover:to-cyan-600 text-white py-3 rounded-xl font-semibold transition-colors duration-300 flex items-center justify-center gap-2">
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                </svg>
+                                Espace Client
+                            </a>
+                            <a href="{{ route('contacts') }}#contact" 
+                            class="w-full border-2 border-blue-500 text-blue-600 hover:bg-blue-50 py-3 rounded-xl font-semibold transition-colors duration-300 text-center">
+                                Devis Gratuit
+                            </a>
+                        </div>
+                    @endif
+                </nav>
+            </div>
+        </div>
+    </header>
 
     @yield('content')
 
@@ -103,7 +277,7 @@
                     </h3>
                     <ul class="space-y-4 text-gray-300">
                         <li>
-                            <a href="#services" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
+                            <a href="{{ route('services') }}" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-blue-400 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
@@ -111,23 +285,23 @@
                             </a>
                         </li>
                         <li>
-                            <a href="#histoire" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
+                            <a href="{{ route('about') }}" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-blue-400 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
-                                <span class="font-medium">Notre histoire</span>
+                                <span class="font-medium">À propos</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#pourquoi" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
+                            <a href="{{ route('blog') }}" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-blue-400 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
-                                <span class="font-medium">Pourquoi nous</span>
+                                <span class="font-medium">Blog</span>
                             </a>
                         </li>
                         <li>
-                            <a href="#contact" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
+                            <a href="{{ route('contacts') }}#contact" class="hover:text-white transition-all duration-300 flex items-center group bg-white/5 hover:bg-white/10 rounded-lg p-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-blue-400 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
                                 </svg>
@@ -165,29 +339,7 @@
                         </li>
                     </ul>
                     
-                    <!-- Horaires d'ouverture -->
-                    <div class="mt-6 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
-                        <h4 class="font-semibold text-white mb-3 flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
-                            </svg>
-                            Horaires d'ouverture
-                        </h4>
-                        <div class="text-sm text-gray-300 space-y-2">
-                            <div class="flex justify-between items-center">
-                                <span>Lun - Ven:</span>
-                                <span class="font-medium text-white">8h00 - 18h00</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>Samedi:</span>
-                                <span class="font-medium text-white">9h00 - 17h00</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span>Dimanche:</span>
-                                <span class="font-medium text-amber-400">Urgences uniquement</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
 
                 <!-- Colonne 4 : Suivez-nous -->
@@ -216,25 +368,31 @@
                         </a>
                     </div>
                     
-                    <!-- Newsletter -->
-                    <div class="bg-gradient-to-br from-blue-600/20 to-cyan-600/20 backdrop-blur-sm border border-white/10 rounded-xl p-5">
+
+                    <!-- Horaires d'ouverture -->
+                    <div class="mt-6 bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10">
                         <h4 class="font-semibold text-white mb-3 flex items-center">
-                            <svg class="w-4 h-4 mr-2 text-cyan-400" fill="currentColor" viewBox="0 0 20 20">
-                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
-                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+                            <svg class="w-4 h-4 mr-2 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"/>
                             </svg>
-                            Newsletter
+                            Horaires d'ouverture
                         </h4>
-                        <p class="text-sm text-gray-300 mb-4">Recevez nos offres spéciales</p>
-                        <form class="flex gap-2">
-                            <input type="email" placeholder="Votre email" class="flex-1 bg-white/10 border border-white/20 text-white placeholder-gray-400 px-4 py-3 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent text-sm">
-                            <button type="submit" class="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 text-white px-4 py-3 rounded-lg transition-all duration-300 transform hover:scale-105">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                                </svg>
-                            </button>
-                        </form>
+                        <div class="text-sm text-gray-300 space-y-2">
+                            <div class="flex justify-between items-center">
+                                <span>Lun - Ven:</span>
+                                <span class="font-medium text-white">8h00 - 18h00</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Samedi:</span>
+                                <span class="font-medium text-white">9h00 - 17h00</span>
+                            </div>
+                            <div class="flex justify-between items-center">
+                                <span>Dimanche:</span>
+                                <span class="font-medium text-amber-400">Urgences uniquement</span>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             </div>
 
@@ -243,11 +401,7 @@
                 <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
                     <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-6 text-sm text-gray-300">
                         <span class="text-white font-medium">Copyright © SEREMAD <span id="year"></span> - Tous droits réservés</span>
-                        <div class="flex items-center space-x-4">
-                            <a href="#" class="hover:text-white transition-colors duration-300 hover:underline">Mentions légales</a>
-                            <a href="#" class="hover:text-white transition-colors duration-300 hover:underline">Politique de confidentialité</a>
-                            <a href="#" class="hover:text-white transition-colors duration-300 hover:underline">CGV</a>
-                        </div>
+
                     </div>
                     
                     <!-- Méthodes de paiement -->
@@ -286,10 +440,15 @@
 
     <!-- Lien du cdn javascript -->
     <script src="js/swiper.js"></script>
-    <script src=" {{ asset('js/app.js') }}"></script>
-    <script src=" {{ asset('js/carousel.js') }}"></script>
-    <script src=" {{ asset('js/homeslide.js') }}"></script>
-    <script src=" {{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{ asset('js/carousel.js') }}"></script>
+    <script src="{{ asset('js/homeslide.js') }}"></script>
+    <script src="{{ asset('js/header.js') }}"></script>
+    <script src="{{ asset('js/home-carousel.js') }}"></script>
+    <script src="{{ asset('js/hero-slider.js') }}"></script>
+    <script src="{{ asset('js/modal.js') }}"></script>
+    <script src="{{ asset('js/lucide-init.js') }}"></script>
+    <script src="{{ asset('js/mobile-menu.js') }}"></script>cript>
 
     <!--     
      Lien du cdn personnalisé -->
