@@ -1,0 +1,26 @@
+/* Styles pour les carousels et animations */
+@keyframes infinite-scroll {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+.animate-infinite-scroll {
+    animation: infinite-scroll 30s linear infinite;
+    width: 200%;
+}
+
+/* Pause l'animation au survol */
+.group:hover .animate-infinite-scroll {
+    animation-play-state: paused;
+}
+
+/* Support du réduit de mouvement */
+@media (prefers-reduced-motion: reduce) {
+    .animate-infinite-scroll {
+        animation: none;
+    }
+}
