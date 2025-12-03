@@ -335,7 +335,7 @@
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-blue-400 group-hover:text-cyan-400 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                             </svg>
-                            <a href="mailto:seremad48@gmail.com" class="font-medium hover:text-white transition-colors duration-300">seremad48@gmail.com</a>
+                            <a href="mailto:seremad48@gmail.com" class="font-medium hover:text-white transition-colors duration-300">seremad4@gmail.com</a>
                         </li>
                     </ul>
                     
@@ -398,33 +398,9 @@
 
             <!-- Bas de page -->
             <div class="border-t border-white/20 mt-12 pt-8">
-                <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
-                    <div class="flex flex-col md:flex-row items-center space-y-3 md:space-y-0 md:space-x-6 text-sm text-gray-300">
-                        <span class="text-white font-medium">Copyright © SEREMAD <span id="year"></span> - Tous droits réservés</span>
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-6 text-sm text-gray-300">
+                    <span class="text-white font-medium">Copyright © SEREMAD <span id="year"></span> - Tous droits réservés</span>
 
-                    </div>
-                    
-                    <!-- Méthodes de paiement -->
-                    <div class="flex items-center space-x-4">
-                        <span class="text-sm text-gray-300">Paiements sécurisés:</span>
-                        <div class="flex space-x-2">
-                            <div class="bg-white/10 backdrop-blur-sm p-2 rounded-lg border border-white/10">
-                                <svg class="w-6 h-4" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M9 7H1V9H9V7Z" fill="#1434CB"/>
-                                    <path d="M23 1H1V3H23V1Z" fill="#1434CB"/>
-                                    <path d="M23 13H15V15H23V13Z" fill="#1434CB"/>
-                                    <path d="M13 13H1V15H13V13Z" fill="#1434CB"/>
-                                </svg>
-                            </div>
-                            <div class="bg-white/10 backdrop-blur-sm p-2 rounded-lg border border-white/10">
-                                <svg class="w-6 h-4" viewBox="0 0 24 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10 1H1V15H10V1Z" fill="#FF5F00"/>
-                                    <path d="M11 8C11 5.2 12.8 2.8 15.4 1.5C14.3 0.6 12.9 0 11.4 0C7.7 0 4.7 3 4.7 6.7C4.7 10.4 7.7 13.4 11.4 13.4C12.9 13.4 14.3 12.8 15.4 11.9C12.8 10.6 11 8.2 11 8Z" fill="#EB001B"/>
-                                    <path d="M23 8C23 10.4 21.4 12.4 19.2 13.3C18.1 12.4 17.3 11.1 17.3 9.6C17.3 8.1 18.1 6.8 19.2 5.9C21.4 6.8 23 8.6 23 8Z" fill="#F79E1B"/>
-                                </svg>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -448,7 +424,7 @@
     <script src="{{ asset('js/hero-slider.js') }}"></script>
     <script src="{{ asset('js/modal.js') }}"></script>
     <script src="{{ asset('js/lucide-init.js') }}"></script>
-    <script src="{{ asset('js/mobile-menu.js') }}"></script>cript>
+    <script src="{{ asset('js/mobile-menu.js') }}"></script>
 
     <!--     
      Lien du cdn personnalisé -->

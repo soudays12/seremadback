@@ -37,6 +37,11 @@ class HomeController extends Controller
     public function about(){
         return view('pages.about');
     }
+    public function blog()
+    {
+        $publications = Publication::with('images')->get();
+        return view('pages.all_publications', compact('publications'));
+    }
     
     // All publications page
     public function allpublications(){
