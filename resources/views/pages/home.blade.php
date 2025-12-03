@@ -6,7 +6,7 @@
     <!-- section accueil -->
     <section class="relative overflow-hidden">
         <!-- Slider container -->
-        <div id="heroSlider" class="relative w-full h-screen">
+        <div id="heroSlider" class="relative w-full h-screen border border-red-500">
             <!-- Slide 1 - Accueil -->
             <div class="absolute inset-0 transition-all duration-1000 opacity-100 transform translate-x-0 bg-cover bg-center bg-no-repeat"
                 style="background-image: url('images/plein-coup-homme-poussant-le-bouton-de-l-ascenseur.png');">
