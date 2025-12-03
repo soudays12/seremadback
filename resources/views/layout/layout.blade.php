@@ -354,7 +354,7 @@
                     
                     <!-- Réseaux sociaux -->
                     <div class="flex space-x-3 mb-8">
-                        <a href="#" class="bg-white/10 hover:bg-blue-600 text-white p-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg backdrop-blur-sm border border-white/10">
+                        <a href="https://www.facebook.com/profile.php?id=61584767601300" class="bg-white/10 hover:bg-blue-600 text-white p-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg backdrop-blur-sm border border-white/10">
                             <i class="fab fa-facebook-f text-lg"></i>
                         </a>
                         <a href="#" class="bg-white/10 hover:bg-pink-600 text-white p-3 rounded-xl transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg backdrop-blur-sm border border-white/10">
