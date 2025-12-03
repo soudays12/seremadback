@@ -964,7 +964,7 @@
                                     <div class="flex-1">
                                         <div class="text-white font-semibold text-lg mb-1">Email</div>
                                         <a href="mailto:seremad48@gmail.com" class="text-cyan-300 text-lg font-medium hover:text-cyan-200 transition-colors duration-300 break-all">
-                                            seremad48@gmail.com
+                                            seremad4@gmail.com
                                         </a>
                                         <div class="text-blue-200 text-sm mt-1">Réponse sous 24h</div>
                                     </div>
